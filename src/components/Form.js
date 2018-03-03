@@ -13,7 +13,7 @@ class Form extends Component {
           Name
           <input
             id="name"
-            ref={(input) => { this.name = input }}
+            ref={(input) => { this.name = input; }}
             type="text"
           />
         </label>
@@ -21,7 +21,7 @@ class Form extends Component {
           Lat
           <input
             id="latitude"
-            ref={(input) => { this.lat = input }}
+            ref={(input) => { this.lat = input; }}
             type="text"
           />
         </label>
@@ -29,16 +29,17 @@ class Form extends Component {
           Lon
           <input
             id="longitude"
-            ref={(input) => { this.lng = input }}
-            type="text"/>
+            ref={(input) => { this.lng = input; }}
+            type="text"
+          />
         </label>
         <input
           type="submit"
           value="Save"
-          onClick={(e) => this.submitForm(e, {
+          onClick={e => this.submitForm(e, {
             name: this.name.value,
             lat: this.lat.value,
-            lng: this.lng.value
+            lng: this.lng.value,
           })}
         />
       </form>
