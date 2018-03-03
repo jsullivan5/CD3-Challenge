@@ -10,11 +10,12 @@ class Form extends Component {
       longitude: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  submitForm(e, data) {
-    e.preventDefault();
-    this.props.saveLocation(data);
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.saveLocation(this.state);
   }
 
   handleChange(event) {
@@ -26,7 +27,10 @@ class Form extends Component {
     const { name, latitude, longitude } = this.state;
 
     return (
-      <form className="form">
+      <form
+        className="form"
+        onSubmit={this.handleSubmit}
+      >
         <label htmlFor="name">
           Name
           <input
@@ -60,11 +64,6 @@ class Form extends Component {
         <input
           type="submit"
           value="Save"
-          onClick={e => this.submitForm(e, {
-            name: this.name.value,
-            lat: this.lat.value,
-            lng: this.lng.value,
-          })}
         />
       </form>
     );
