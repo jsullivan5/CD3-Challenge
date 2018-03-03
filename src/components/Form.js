@@ -9,6 +9,7 @@ class Form extends Component {
       latitude: '',
       longitude: '',
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   submitForm(e, data) {
@@ -16,13 +17,23 @@ class Form extends Component {
     this.props.saveLocation(data);
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
   render() {
+    const { name, latitude, longitude } = this.state;
+
     return (
       <form className="form">
         <label htmlFor="name">
           Name
           <input
             id="name"
+            name="name"
+            value={name}
+            onChange={this.handleChange}
             ref={(input) => { this.name = input; }}
             type="text"
           />
@@ -31,6 +42,9 @@ class Form extends Component {
           Lat
           <input
             id="latitude"
+            name="latitude"
+            value={latitude}
+            onChange={this.handleChange}
             ref={(input) => { this.lat = input; }}
             type="text"
           />
@@ -39,6 +53,9 @@ class Form extends Component {
           Lon
           <input
             id="longitude"
+            name="longitude"
+            value={longitude}
+            onChange={this.handleChange}
             ref={(input) => { this.lng = input; }}
             type="text"
           />
