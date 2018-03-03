@@ -9,23 +9,26 @@ class Form extends Component {
   render() {
     return (
       <form className="form">
-        <label>
+        <label htmlFor="name">
           Name
           <input
+            id="name"
             ref={(input) => { this.name = input }}
             type="text"
           />
         </label>
-        <label>
+        <label htmlFor="latitude">
           Lat
           <input
+            id="latitude"
             ref={(input) => { this.lat = input }}
             type="text"
           />
         </label>
-        <label>
+        <label htmlFor="longitude">
           Lon
           <input
+            id="longitude"
             ref={(input) => { this.lng = input }}
             type="text"/>
         </label>
