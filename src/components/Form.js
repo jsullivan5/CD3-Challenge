@@ -36,9 +36,9 @@ class Form extends Component {
           <input
             id="name"
             name="name"
+            type="text"
             value={name}
             onChange={this.handleChange}
-            type="text"
           />
         </label>
         <label htmlFor="latitude">
@@ -46,9 +46,9 @@ class Form extends Component {
           <input
             id="latitude"
             name="latitude"
+            type="text"
             value={latitude}
             onChange={this.handleChange}
-            type="text"
           />
         </label>
         <label htmlFor="longitude">
@@ -56,9 +56,9 @@ class Form extends Component {
           <input
             id="longitude"
             name="longitude"
+            type="text"
             value={longitude}
             onChange={this.handleChange}
-            type="text"
           />
         </label>
         <input
