@@ -1,14 +1,14 @@
 require('isomorphic-fetch');
 
 
-const storeAllLocations = (locations) => {
+export const storeAllLocations = (locations) => {
   return {
     type: 'STORE_LOCATIONS',
     data: locations.locations,
   };
 };
 
-const fetchAllLocations = () => {
+export const fetchAllLocations = () => {
   return (dispatch) => {
     return fetch('/locations', {
       headers: {
@@ -20,6 +20,3 @@ const fetchAllLocations = () => {
       .then(json => dispatch(storeAllLocations(json)));
   };
 };
-
-
-export { fetchAllLocations }
