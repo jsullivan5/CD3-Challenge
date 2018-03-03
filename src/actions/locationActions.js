@@ -8,6 +8,13 @@ export const storeAllLocations = (locations) => {
   };
 };
 
+export const saveLocation = (location) => {
+  return {
+    type: 'SAVE_LOCATION',
+    data: location,
+  };
+};
+
 export const fetchAllLocations = () => {
   return (dispatch) => {
     return fetch('/locations', {
