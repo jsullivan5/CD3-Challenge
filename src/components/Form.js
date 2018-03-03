@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 
 
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      latitude: '',
+      longitude: '',
+    };
+  }
+
   submitForm(e, data) {
     e.preventDefault();
     this.props.saveLocation(data);
   }
+
   render() {
     return (
       <form className="form">
