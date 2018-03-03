@@ -32,16 +32,15 @@ class Form extends Component {
             ref={(input) => { this.lng = input }}
             type="text"/>
         </label>
-        <button
+        <input
           type="submit"
+          value="Save"
           onClick={(e) => this.submitForm(e, {
             name: this.name.value,
             lat: this.lat.value,
             lng: this.lng.value
           })}
-        >
-            Save
-        </button>
+        />
       </form>
     );
   }
