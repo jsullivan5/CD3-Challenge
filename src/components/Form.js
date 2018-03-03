@@ -34,7 +34,6 @@ class Form extends Component {
             name="name"
             value={name}
             onChange={this.handleChange}
-            ref={(input) => { this.name = input; }}
             type="text"
           />
         </label>
@@ -45,7 +44,6 @@ class Form extends Component {
             name="latitude"
             value={latitude}
             onChange={this.handleChange}
-            ref={(input) => { this.lat = input; }}
             type="text"
           />
         </label>
@@ -56,7 +54,6 @@ class Form extends Component {
             name="longitude"
             value={longitude}
             onChange={this.handleChange}
-            ref={(input) => { this.lng = input; }}
             type="text"
           />
         </label>
