@@ -1,14 +1,9 @@
-const initialState = {
-  data: [],
-};
-
-const Locations = (state = initialState, action) => {
+const Locations = (state = [], action) => {
   switch (action.type) {
     case 'STORE_LOCATIONS':
-      // store an array of locations to state
-      return Object.assign({}, state, {
-        data: state.data.concat(action.data),
-      });
+      return [...state, ...action.data];
+    case 'SAVE_LOCATION':
+      return [...state, action.data];
     default:
       return state;
   }

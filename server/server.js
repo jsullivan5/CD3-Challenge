@@ -34,6 +34,16 @@ app.locals.locations = initialLocations;
 
 app.get('/locations', (request, response) => response.send({ locations: app.locals.locations }));
 
+app.post('/locations', (req, res) => {
+  const { locations } = app.locals;
+  const formattedLocation = Object.assign(req.body, {
+    id: `id${locations.length + 1}`,
+  });
+
+  locations.push(formattedLocation);
+  res.status(200).send(formattedLocation);
+});
+
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 // Always return the main index.html, so react-router render the route in the client

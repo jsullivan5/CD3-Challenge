@@ -2,43 +2,84 @@ import React, { Component } from 'react';
 
 
 class Form extends Component {
-  submitForm(e, data) {
-    e.preventDefault();
-    this.props.saveLocation(data);
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      lat: '',
+      lng: '',
+    };
+    this.clearInputs = this.clearInputs.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  clearInputs() {
+    this.setState({
+      name: '',
+      lat: '',
+      lng: '',
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { name, lat, lng } = this.state;
+
+    this.props.saveLocation({
+      name,
+      lat: parseFloat(lat, 10),
+      lng: parseFloat(lng, 10),
+    }, () => this.clearInputs());
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
   render() {
+    const { name, lat, lng } = this.state;
+
     return (
-      <form className="form">
-        <label>
+      <form
+        className="form"
+        onSubmit={this.handleSubmit}
+      >
+        <label htmlFor="name">
           Name
           <input
-            ref={(input) => { this.name = input }}
+            id="name"
+            name="name"
             type="text"
+            value={name}
+            onChange={this.handleChange}
           />
         </label>
-        <label>
+        <label htmlFor="lat">
           Lat
           <input
-            ref={(input) => { this.lat = input }}
+            id="lat"
+            name="lat"
             type="text"
+            value={lat}
+            onChange={this.handleChange}
           />
         </label>
-        <label>
+        <label htmlFor="lng">
           Lon
           <input
-            ref={(input) => { this.lng = input }}
-            type="text"/>
+            id="lng"
+            name="lng"
+            type="text"
+            value={lng}
+            onChange={this.handleChange}
+          />
         </label>
-        <button
+        <input
           type="submit"
-          onClick={(e) => this.submitForm(e, {
-            name: this.name.value,
-            lat: this.lat.value,
-            lng: this.lng.value
-          })}
-        >
-            Save
-        </button>
+          value="Save"
+        />
       </form>
     );
   }

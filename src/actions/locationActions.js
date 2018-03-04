@@ -1,14 +1,21 @@
 require('isomorphic-fetch');
 
 
-const storeAllLocations = (locations) => {
+export const storeAllLocations = (locations) => {
   return {
     type: 'STORE_LOCATIONS',
     data: locations.locations,
   };
 };
 
-const fetchAllLocations = () => {
+export const saveLocation = (location) => {
+  return {
+    type: 'SAVE_LOCATION',
+    data: location,
+  };
+};
+
+export const fetchAllLocations = () => {
   return (dispatch) => {
     return fetch('/locations', {
       headers: {
@@ -21,5 +28,15 @@ const fetchAllLocations = () => {
   };
 };
 
-
-export { fetchAllLocations }
+export const postLocation = (location) => {
+  return (dispatch) => {
+    return fetch('/locations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(location),
+    })
+    .then(response => response.json())
+    .then(data => dispatch(saveLocation(data)))
+    .catch(error => console.error(error));
+  };
+};
