@@ -6,8 +6,8 @@ class Form extends Component {
     super(props);
     this.state = {
       name: '',
-      latitude: '',
-      longitude: '',
+      lat: '',
+      lng: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +15,13 @@ class Form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.saveLocation(this.state);
+    const { name, lat, lng } = this.state;
+
+    this.props.saveLocation({
+      name,
+      lat: parseFloat(lat, 10),
+      lng: parseFloat(lng, 10),
+    });
   }
 
   handleChange(event) {
@@ -24,7 +30,7 @@ class Form extends Component {
   }
 
   render() {
-    const { name, latitude, longitude } = this.state;
+    const { name, lat, lng } = this.state;
 
     return (
       <form
@@ -41,23 +47,23 @@ class Form extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <label htmlFor="latitude">
+        <label htmlFor="lat">
           Lat
           <input
-            id="latitude"
-            name="latitude"
+            id="lat"
+            name="lat"
             type="text"
-            value={latitude}
+            value={lat}
             onChange={this.handleChange}
           />
         </label>
-        <label htmlFor="longitude">
+        <label htmlFor="lng">
           Lon
           <input
-            id="longitude"
-            name="longitude"
+            id="lng"
+            name="lng"
             type="text"
-            value={longitude}
+            value={lng}
             onChange={this.handleChange}
           />
         </label>
