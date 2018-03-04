@@ -9,8 +9,17 @@ class Form extends Component {
       lat: '',
       lng: '',
     };
+    this.clearInputs = this.clearInputs.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  clearInputs() {
+    this.setState({
+      name: '',
+      lat: '',
+      lng: '',
+    });
   }
 
   handleSubmit(event) {
@@ -21,7 +30,7 @@ class Form extends Component {
       name,
       lat: parseFloat(lat, 10),
       lng: parseFloat(lng, 10),
-    });
+    }, () => this.clearInputs());
   }
 
   handleChange(event) {
