@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LeafletMap from '../containers/LeafletMap';
+import LeafletContainer from '../containers/LeafletContainer';
 import FormContainer from '../containers/FormContainer';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <FormContainer />
-        <LeafletMap locations={this.props.locations} />
+        <LeafletContainer/>
       </div>
     );
   }

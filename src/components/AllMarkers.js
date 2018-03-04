@@ -1,19 +1,24 @@
-/*eslint-disable no-unused-vars*/
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import MapMarker from './Marker'
+import MapMarker from './Marker';
 
 class AllMarkers extends Component {
   render() {
-    const markerArray = this.props.locations.map((marker, i) => {
-      return (
-        <MapMarker
-          key={i}
-          location={[+marker.lat, +marker.lng]}
-          name={marker.name}
-        />
-      )
-    })
+    const { locations } = this.props;
+    const markerArray = locations ?
+      locations.map((marker) => {
+        return (
+          <MapMarker
+            key={marker.id}
+            location={[+marker.lat, +marker.lng]}
+            name={marker.name}
+            onClick={() => this.props.modifyPolygon([
+              marker.lat,
+              marker.lng,
+            ])}
+          />
+        );
+      })
+      : null;
 
     return (
       <div className="paths-container">
