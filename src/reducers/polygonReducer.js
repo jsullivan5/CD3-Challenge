@@ -18,9 +18,9 @@ const modifyLocations = (state, actionData) => {
   }
 
   if (index !== null) {
-    return newState.splice(index, 1);
+    newState.splice(index, 1);
+    return newState;
   }
-
   return [...newState, actionData];
 };
 
