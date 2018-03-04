@@ -27,3 +27,16 @@ export const fetchAllLocations = () => {
       .then(json => dispatch(storeAllLocations(json)));
   };
 };
+
+export const postLocation = (location) => {
+  return (dispatch) => {
+    return fetch('/locations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(location),
+    })
+    .then(response => response.json())
+    .then(data => dispatch(saveLocation(data)))
+    .catch(error => console.error(error));
+  };
+};
