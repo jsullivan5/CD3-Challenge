@@ -5,10 +5,10 @@ class AllMarkers extends Component {
   render() {
     const { locations } = this.props;
     const markerArray = locations ?
-      locations.map((marker, i) => {
+      locations.map((marker) => {
         return (
           <MapMarker
-            key={i}
+            key={marker.id}
             location={[+marker.lat, +marker.lng]}
             name={marker.name}
             onClick={() => this.props.modifyPolygon([
