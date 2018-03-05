@@ -33,7 +33,7 @@ async function run() {
 
     try {
       const results = await cd3Collection.insert(location);
-      res.status(201).send(results);
+      res.status(201).send(results.ops[0]);
     } catch (error) {
       console.error(error);
     }
