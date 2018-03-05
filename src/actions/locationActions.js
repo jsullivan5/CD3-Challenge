@@ -1,4 +1,4 @@
-import { flyTo } from './';
+import { flyTo, removePolygon } from './';
 
 require('isomorphic-fetch');
 
@@ -59,9 +59,12 @@ export const deleteLocation = (location) => {
     return fetch(`/locations/${location._id}`, {
       method: 'DELETE',
     })
-      .then((response) => {
-        console.log(response.status);
+      .then(() => {
         dispatch(removeLocation(location));
+        dispatch(removePolygon([
+          location.lat,
+          location.lng,
+        ]));
       })
       .catch(error => console.error(error));
   };
