@@ -1,7 +1,7 @@
 import React from 'react';
 import MapMarker from './Marker';
 
-const AllMarkers = ({ locations, modifyPolygon, removeLocation }) => {
+const AllMarkers = ({ locations, modifyPolygon, deleteLocation }) => {
   const markerArray = locations ?
     locations.map((marker) => {
       return (
@@ -13,7 +13,7 @@ const AllMarkers = ({ locations, modifyPolygon, removeLocation }) => {
             marker.lat,
             marker.lng,
           ])}
-          removeLocation={removeLocation}
+          deleteLocation={deleteLocation}
           marker={marker}
         />
       );

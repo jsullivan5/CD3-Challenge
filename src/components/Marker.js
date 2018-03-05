@@ -3,7 +3,7 @@ import { Marker, Tooltip, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import tealdot from '../imgs/tealdot.svg';
 
-const MapMarker = ({ location, onClick, name, removeLocation, marker }) => {
+const MapMarker = ({ location, onClick, name, deleteLocation, marker }) => {
   const icon = L.icon({
     iconUrl: tealdot,
     iconSize: [15, 15],
@@ -25,7 +25,7 @@ const MapMarker = ({ location, onClick, name, removeLocation, marker }) => {
           </div>
         </Tooltip>
         <Popup>
-          <button onClick={() => removeLocation(marker)}>
+          <button onClick={() => deleteLocation(marker)}>
             Delete
           </button>
         </Popup>
