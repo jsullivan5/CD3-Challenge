@@ -40,6 +40,7 @@ class Form extends Component {
 
   render() {
     const { name, lat, lng } = this.state;
+    const isEnabled = name !== '' && lat !== '' && lng !== '';
 
     return (
       <form
@@ -82,6 +83,7 @@ class Form extends Component {
         <input
           type="submit"
           value="Save"
+          disabled={!isEnabled}
         />
       </form>
     );
