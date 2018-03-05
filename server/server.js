@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 
 const app = express();
@@ -9,48 +7,52 @@ const path = require('path');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-const url = process.env.MONGO_URI;
-const mongoClient = require('mongodb').MongoClient;
+// Get all users
+const initialLocations = [
+  {
+    id: 'id1',
+    name: 'Denver',
+    lat: 39.742043,
+    lng: -104.991531,
+  },
+  {
+    id: 'id2',
+    name: 'LA',
+    lat: 34.052235,
+    lng: -118.243683,
+  },
+  {
+    id: 'id3',
+    name: 'Boston',
+    lat: 42.364506,
+    lng: -71.038887,
+  },
+];
 
-async function run() {
-  const client = await mongoClient.connect(url);
-  const cd3DB = await client.db('cd3');
-  const cd3Collection = await cd3DB.collection('locations');
+app.locals.idIndex = 3;
+app.locals.locations = initialLocations;
 
-  console.log('Connected to the database');
+app.get('/locations', (request, response) => response.send({ locations: app.locals.locations }));
 
-  app.get('/locations', async (request, response) => {
-    try {
-      const locations = await cd3Collection.find().toArray();
-      response.status(200).send({ locations });
-    } catch (error) {
-      console.error(error);
-    }
+app.post('/locations', (req, res) => {
+  const { locations } = app.locals;
+  const formattedLocation = Object.assign(req.body, {
+    id: `id${locations.length + 1}`,
   });
 
-  app.post('/locations', async (req, res) => {
-    const location = req.body;
+  locations.push(formattedLocation);
+  res.status(200).send(formattedLocation);
+});
 
-    try {
-      const results = await cd3Collection.insert(location);
-      res.status(201).send(results);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
-  app.use(express.static(path.resolve(__dirname, '..', 'build')));
+// Always return the main index.html, so react-router render the route in the client
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+});
 
-  // Always return the main index.html, so react-router render the route in the client
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-  });
+const portNumber = process.env.PORT || 3001;
 
-  const portNumber = process.env.PORT || 3001;
-
-  app.listen(portNumber, () => {
-    console.log('RrrarrrrRrrrr server alive on port 3001');
-  });
-}
-
-run().catch(error => console.error(error));
+app.listen(portNumber, () => {
+  console.log('RrrarrrrRrrrr server alive on port 3001');
+});
