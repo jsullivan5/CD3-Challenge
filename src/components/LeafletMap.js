@@ -3,6 +3,10 @@ import { Map, TileLayer, ZoomControl, Polygon } from 'react-leaflet';
 import AllMarkersContainer from '../containers/AllMarkersContainer';
 
 class LeafletMap extends Component {
+  componentDidMount() {
+    this.props.setMap(this.mapInstance);
+  }
+
   render() {
     const { polygon } = this.props;
     return (
@@ -13,6 +17,7 @@ class LeafletMap extends Component {
           center={[39.750809, -104.996810]}
           zoom={4}
           maxBounds={[[85, 100], [-85, -280]]}
+          ref={(el) => { this.mapInstance = el; }}
         >
           <TileLayer
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
