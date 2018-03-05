@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, ZoomControl, Polygon } from 'react-leaflet';
+import {
+  Map,
+  TileLayer,
+  ZoomControl,
+  Polygon,
+  LayersControl,
+} from 'react-leaflet';
 import AllMarkersContainer from '../containers/AllMarkersContainer';
 
 class LeafletMap extends Component {
@@ -19,12 +25,28 @@ class LeafletMap extends Component {
           maxBounds={[[85, 100], [-85, -280]]}
           ref={(el) => { this.mapInstance = el; }}
         >
-          <TileLayer
-            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-            attribution='Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-            maxZoom={10}
-            minZoom={2}
-          />
+          <LayersControl position="topright">
+            <LayersControl.BaseLayer name="Basic" checked>
+              <TileLayer
+                url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+                attribution='Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                maxZoom={10}
+                minZoom={2}
+              />
+            </LayersControl.BaseLayer>
+            <LayersControl.BaseLayer name="Outdoors">
+              <TileLayer
+                url="https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=720e731b227c40be984f998b71463a2b"
+                attribution='Map data &copy; <a href="https://thunderforest.com";>Thunderforest</a> contributors'
+              />
+            </LayersControl.BaseLayer>
+            <LayersControl.BaseLayer name="Spinal Map">
+              <TileLayer
+                url="https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png?apikey=720e731b227c40be984f998b71463a2b"
+                attribution='Map data &copy; <a href="https://thunderforest.com";>Thunderforest</a> contributors'
+              />
+            </LayersControl.BaseLayer>
+          </LayersControl>
           <ZoomControl
             position="bottomright"
           />
