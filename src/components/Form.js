@@ -8,10 +8,32 @@ class Form extends Component {
       name: '',
       lat: '',
       lng: '',
+      errors: {},
     };
     this.clearInputs = this.clearInputs.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateLatLng = this.validateLatLng.bind(this);
+  }
+
+  validateLatLng() {
+    const { lat, lng } = this.state;
+    const newErrors = {};
+
+    if (!isFinite(lat) && !Math.abs(lat) <= 90) {
+      newErrors.invalidLat = true;
+    }
+
+    if (!isFinite(lng) && !Math.abs(lng) <= 180) {
+      newErrors.invalidLng = true;
+    }
+
+    if (newErrors.invalidLat || newErrors.invalidLng) {
+      this.setState({ errors: newErrors });
+      return true;
+    }
+
+    return false;
   }
 
   clearInputs() {
@@ -19,12 +41,15 @@ class Form extends Component {
       name: '',
       lat: '',
       lng: '',
+      errors: {},
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const { name, lat, lng } = this.state;
+
+    if (this.validateLatLng()) { return; }
 
     this.props.saveLocation({
       name,
@@ -39,7 +64,7 @@ class Form extends Component {
   }
 
   render() {
-    const { name, lat, lng } = this.state;
+    const { name, lat, lng, errors } = this.state;
     const isEnabled = name !== '' && lat !== '' && lng !== '';
 
     return (
@@ -69,6 +94,7 @@ class Form extends Component {
             placeholder="32.7767"
           />
         </label>
+        {errors.invalidLat && <p className="error">Invalid Latitude</p>}
         <label htmlFor="lng">
           Lon
           <input
@@ -80,6 +106,7 @@ class Form extends Component {
             placeholder="-96.7970"
           />
         </label>
+        {errors.invalidLng && <p className="error">Invalid Longitude</p>}
         <input
           type="submit"
           value="Save"
