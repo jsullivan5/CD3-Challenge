@@ -20,14 +20,23 @@ async function run() {
   console.log('Connected to the database');
 
   app.get('/locations', async (request, response) => {
-    const locations = await cd3Collection.find().toArray();
-    response.status(200).send({ locations });
+    try {
+      const locations = await cd3Collection.find().toArray();
+      response.status(200).send({ locations });
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   app.post('/locations', async (req, res) => {
     const location = req.body;
-    const results = await cd3Collection.insert(location);
-    res.status(201).send(results);
+
+    try {
+      const results = await cd3Collection.insert(location);
+      res.status(201).send(results);
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   app.use(express.static(path.resolve(__dirname, '..', 'build')));
