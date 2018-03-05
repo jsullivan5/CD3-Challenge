@@ -46,3 +46,8 @@ input {
   padding-top: 65px;
   background-color: rgba(175, 175, 175, 0.5);
 }
+
+.error {
+  color: red;
+  background-color: white
+}
