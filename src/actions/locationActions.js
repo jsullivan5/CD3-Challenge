@@ -53,3 +53,16 @@ export const postLocation = (location) => {
       .catch(error => console.error(error));
   };
 };
+
+export const deleteLocation = (location) => {
+  return (dispatch) => {
+    return fetch(`/locations/${location._id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        console.log(response.status);
+        dispatch(removeLocation(location));
+      })
+      .catch(error => console.error(error));
+  };
+};
