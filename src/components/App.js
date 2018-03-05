@@ -4,17 +4,15 @@ import FormContainer from '../containers/FormContainer';
 
 class App extends Component {
   componentDidMount() {
-    this.getLocations();
-  }
-  getLocations() {
     this.props.fetchAllLocations();
   }
+
   render() {
     return (
-      <div className="App">
+      <main className="App">
         <FormContainer />
-        <LeafletContainer/>
-      </div>
+        <LeafletContainer />
+      </main>
     );
   }
 }
