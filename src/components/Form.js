@@ -54,6 +54,7 @@ class Form extends Component {
             type="text"
             value={name}
             onChange={this.handleChange}
+            placeholder="Dallas"
           />
         </label>
         <label htmlFor="lat">
@@ -64,6 +65,7 @@ class Form extends Component {
             type="text"
             value={lat}
             onChange={this.handleChange}
+            placeholder="32.7767"
           />
         </label>
         <label htmlFor="lng">
@@ -74,6 +76,7 @@ class Form extends Component {
             type="text"
             value={lng}
             onChange={this.handleChange}
+            placeholder="-96.7970"
           />
         </label>
         <input
