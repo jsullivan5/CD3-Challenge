@@ -1,3 +1,5 @@
+import { flyTo } from './';
+
 require('isomorphic-fetch');
 
 
@@ -37,7 +39,10 @@ export const postLocation = (location) => {
       body: JSON.stringify(location),
     })
       .then(response => response.json())
-      .then(json => dispatch(saveLocation(json)))
+      .then((json) => {
+        dispatch(saveLocation(json));
+        dispatch(flyTo(json));
+      })
       .catch(error => console.error(error));
   };
 };
