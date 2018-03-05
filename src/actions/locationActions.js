@@ -17,6 +17,13 @@ export const saveLocation = (location) => {
   };
 };
 
+export const removeLocation = (location) => {
+  return {
+    type: 'REMOVE_LOCATION',
+    data: location,
+  };
+};
+
 export const fetchAllLocations = () => {
   return (dispatch) => {
     return fetch('/locations', {
