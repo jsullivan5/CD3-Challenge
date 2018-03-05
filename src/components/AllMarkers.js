@@ -6,7 +6,7 @@ const AllMarkers = ({ locations, modifyPolygon }) => {
     locations.map((marker) => {
       return (
         <MapMarker
-          key={marker.id}
+          key={marker._id}
           location={[+marker.lat, +marker.lng]}
           name={marker.name}
           onClick={() => modifyPolygon([
