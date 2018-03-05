@@ -3,13 +3,6 @@ import { Map, TileLayer, ZoomControl, Polygon } from 'react-leaflet';
 import AllMarkersContainer from '../containers/AllMarkersContainer';
 
 class LeafletMap extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    };
-  }
-
   render() {
     const { polygon } = this.props;
     return (
