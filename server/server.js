@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 const url = process.env.MONGO_URI;
 const mongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 
 async function run() {
   const client = await mongoClient.connect(url);
@@ -19,10 +20,10 @@ async function run() {
 
   console.log('Connected to the database');
 
-  app.get('/locations', async (request, response) => {
+  app.get('/locations', async (req, res) => {
     try {
       const locations = await cd3Collection.find().toArray();
-      response.status(200).send({ locations });
+      res.status(200).send({ locations });
     } catch (error) {
       console.error(error);
     }
@@ -34,6 +35,20 @@ async function run() {
     try {
       const results = await cd3Collection.insert(location);
       res.status(201).send(results.ops[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  app.delete('/locations/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const results = await cd3Collection.deleteOne({
+        _id: ObjectId(id),
+      });
+      console.log(results);
+      res.sendStatus(204);
     } catch (error) {
       console.error(error);
     }
