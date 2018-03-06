@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Marker, Tooltip, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import tealdot from '../imgs/tealdot.svg';
@@ -32,6 +33,19 @@ const MapMarker = ({ location, onClick, name, deleteLocation, marker }) => {
       </Marker>
     </div>
   );
+};
+
+MapMarker.propTypes = {
+  location: PropTypes.arrayOf(PropTypes.number).isRequired,
+  onClick: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  deleteLocation: PropTypes.func.isRequired,
+  marker: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    lat: PropTypes.number,
+    long: PropTypes.number,
+  }).isRequired,
 };
 
 export default MapMarker;
