@@ -1,8 +1,13 @@
-const modifyPolygon = (location) => {
+export const modifyPolygon = (latLng) => {
   return {
     type: 'MODIFY_POLYGON',
-    data: location,
+    data: latLng,
   };
 };
 
-export default modifyPolygon;
+export const removePolygon = (latLng) => {
+  return {
+    type: 'REMOVE_POLYGON',
+    data: latLng,
+  };
+};

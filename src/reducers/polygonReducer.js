@@ -9,9 +9,8 @@ const matchLocation = (locationArray, location) => {
   return null;
 };
 
-const modifyLocations = (state, actionData) => {
+const modifyLocations = (state, actionData, index) => {
   const newState = [...state];
-  const index = matchLocation(newState, actionData);
 
   if (index !== null && newState.length === 1) {
     return [];
@@ -24,10 +23,24 @@ const modifyLocations = (state, actionData) => {
   return [...newState, actionData];
 };
 
+const removePolygon = (state, actionData, index) => {
+  const newState = [...state];
+
+  if (index === null) {
+    return newState;
+  }
+
+  return modifyLocations(state, actionData, index);
+};
+
 const polygonReducer = (state = [], action) => {
+  const index = matchLocation(state, action.data);
+
   switch (action.type) {
     case 'MODIFY_POLYGON':
-      return modifyLocations(state, action.data);
+      return modifyLocations(state, action.data, index);
+    case 'REMOVE_POLYGON':
+      return removePolygon(state, action.data, index);
     default:
       return state;
   }

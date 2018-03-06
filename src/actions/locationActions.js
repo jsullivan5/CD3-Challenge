@@ -1,4 +1,4 @@
-import { flyTo } from './';
+import { flyTo, removePolygon } from './';
 
 require('isomorphic-fetch');
 
@@ -13,6 +13,13 @@ export const storeAllLocations = (locations) => {
 export const saveLocation = (location) => {
   return {
     type: 'SAVE_LOCATION',
+    data: location,
+  };
+};
+
+export const removeLocation = (location) => {
+  return {
+    type: 'REMOVE_LOCATION',
     data: location,
   };
 };
@@ -42,6 +49,22 @@ export const postLocation = (location) => {
       .then((json) => {
         dispatch(saveLocation(json));
         dispatch(flyTo(json));
+      })
+      .catch(error => console.error(error));
+  };
+};
+
+export const deleteLocation = (location) => {
+  return (dispatch) => {
+    return fetch(`/locations/${location._id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        dispatch(removeLocation(location));
+        dispatch(removePolygon([
+          location.lat,
+          location.lng,
+        ]));
       })
       .catch(error => console.error(error));
   };
