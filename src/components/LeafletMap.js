@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Map,
   TileLayer,
@@ -57,5 +58,14 @@ class LeafletMap extends Component {
     );
   }
 }
+
+LeafletMap.defaultProps = {
+  polygon: [],
+};
+
+LeafletMap.propTypes = {
+  setMap: PropTypes.func.isRequired,
+  polygon: PropTypes.arrayOf(PropTypes.array),
+};
 
 export default LeafletMap;
