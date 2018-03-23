@@ -6,7 +6,7 @@ An exploration into Leaflet.js with React and Redux.
 
 This project leverages the Leaflet.js maps API with the power of React and Redux.
 Users can plant latitude and longitude onto a map.  They can then... connect the dots.
-Users can remove points on the map.  Make sure to check out the different maps laters.
+Users can remove points on the map.  Make sure to check out the different maps layers.
 `Spinal Map` should not be missed!  The linked API is built with Node and Express.
 Data is persisted with MongoDB and Mlab.
 
