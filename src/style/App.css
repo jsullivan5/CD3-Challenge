@@ -18,11 +18,6 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .map {
   height: 100vh;
 }
@@ -49,5 +44,9 @@ input {
 
 .error {
   color: red;
-  background-color: white
+  border-radius: 5px;
+  background-color: white;
+  margin: 20px auto;
+  padding: 5px;
+  width: 200px;
 }
