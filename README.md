@@ -87,3 +87,7 @@ Test are written in Jest.
 * [Redux](https://redux.js.org/)
 * [Express](https://expressjs.com/en/api.html)
 * [MongoDB](https://docs.mongodb.com/)
+
+## Screenshots
+
+![App Screenshot](screenshot.png?raw=true "Spinal Map!")
