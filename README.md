@@ -1,6 +1,6 @@
 # Jet-Fuel
 
-[View Deployment On Heroku](https://cd3-challenge.herokuapp.com/)
+[View Deployment On Heroku](https://connect-the-dots-map.herokuapp.com/)
 
 An exploration into Leaflet.js with React and Redux.
 
