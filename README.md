@@ -1,4 +1,4 @@
-# Jet-Fuel
+# Connect The Dots
 
 [View Deployment On Heroku](https://connect-the-dots-map.herokuapp.com/)
 
